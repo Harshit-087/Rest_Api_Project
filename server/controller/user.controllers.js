@@ -46,8 +46,8 @@ export const signinUser = async(req,res)=>{
 
         res.cookie("token",token,{
             httpOnly:true,
-            sameSite:"none",  // for cross-site origin calls
-            secure:false,
+            sameSite:process.env.NODE_ENV==="production"?"none":"lax",  // for cross-site origin calls
+            secure:process.env.NODE_ENV==="production",
             maxAge:1000*60*60*24
         })
       return res.status(200).json({message:"user logged in successfully",token,data:userExist})
