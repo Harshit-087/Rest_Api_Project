@@ -18,10 +18,10 @@ app.set("trust proxy", 1);
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = (process.env.FRONTEND_URL, process.env.BACKEND_URL)
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.BACKEND_URL
+].filter(Boolean);
 
 app.use(cors({
     // Exact origin matching is required for credential cookies in browsers.
